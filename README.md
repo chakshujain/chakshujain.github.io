@@ -1,7 +1,12 @@
 # Chakshu Jain — Portfolio
 
-A fast, dependency-free personal portfolio for a backend / fintech engineer.
+A fast, dependency-free personal portfolio for a backend / fintech engineer,
+themed as a **"Statement of Work"** — an editorial, print-inspired financial
+document (warm paper, Fraunces serif + JetBrains Mono, hairline rules, a ledger
+table, a stock ticker and a rubber-stamp accent).
+
 Pure HTML, CSS and vanilla JS — no build step, no framework, no `node_modules`.
+Live at **https://chakshujain.github.io**
 
 ## Structure
 

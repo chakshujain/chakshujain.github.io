@@ -4,391 +4,301 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Chakshu Jain — Backend Engineer · Fintech &amp; Payments</title>
-  <meta name="description" content="Chakshu Jain — Founding Backend Engineer building high-throughput fintech and payments systems in Java &amp; Spring Boot. Loan repayment, reconciliation, and event-driven architecture at scale." />
+  <meta name="description" content="Chakshu Jain — Founding backend engineer building high-throughput payments systems in Java &amp; Spring Boot. A statement of work: loan repayment, reconciliation, event-driven architecture at scale." />
   <meta name="author" content="Chakshu Jain" />
-  <meta name="theme-color" content="#05070d" />
+  <meta name="theme-color" content="#e9e3d6" />
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Chakshu Jain — Backend Engineer · Fintech &amp; Payments" />
-  <meta property="og:description" content="Founding engineer building high-throughput payments systems. 1M+ transactions/month, 99.95% uptime." />
+  <meta property="og:title" content="Chakshu Jain — Statement of Work" />
+  <meta property="og:description" content="Founding engineer building high-throughput payments systems. 1M+ transactions/month at 99.95% uptime." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
 
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2305070d'/%3E%3Ctext x='50' y='68' font-size='54' font-family='monospace' font-weight='700' fill='%2300e5a8' text-anchor='middle'%3ECJ%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23e9e3d6'/%3E%3Ctext x='50' y='70' font-size='58' font-family='Georgia,serif' font-weight='700' fill='%23151210' text-anchor='middle'%3ECJ%3C/text%3E%3Crect x='6' y='6' width='88' height='88' fill='none' stroke='%23c8452f' stroke-width='4'/%3E%3C/svg%3E" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <!-- Animated background -->
-  <div class="bg-grid" aria-hidden="true"></div>
-  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
-  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
-  <canvas id="net-canvas" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="rule-progress" id="progress" aria-hidden="true"></div>
 
-  <!-- Scroll progress -->
-  <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
-
-  <!-- Navigation -->
-  <header class="nav" id="nav">
-    <a href="#top" class="nav__brand" aria-label="Home">
-      <span class="nav__logo">CJ</span>
-      <span class="nav__name">Chakshu&nbsp;Jain</span>
+  <!-- ============ TOP BAR ============ -->
+  <header class="topbar" id="topbar">
+    <a class="topbar__id" href="#top">
+      <span class="topbar__mark">CJ</span>
+      <span class="topbar__meta">CHAKSHU&nbsp;JAIN — BACKEND / FINTECH</span>
     </a>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="#about">About</a>
-      <a href="#work">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
+    <nav class="topbar__nav" aria-label="Primary">
+      <a href="#summary">Summary</a>
+      <a href="#ledger">Ledger</a>
+      <a href="#systems">Systems</a>
+      <a href="#builds">Builds</a>
+      <a href="#stack">Stack</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn btn--sm nav__cta">Get in touch</a>
-    <button class="nav__toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="topbar__clock" id="clock" aria-hidden="true">—</div>
+    <button class="topbar__burger" id="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
   </header>
 
   <main id="top">
-    <!-- ============ HERO ============ -->
-    <section class="hero" id="hero">
-      <div class="hero__inner">
-        <p class="hero__eyebrow reveal">
-          <span class="status-dot"></span>
-          Founding Engineer · Huru Payments
-        </p>
-        <h1 class="hero__title">
-          <span class="reveal" style="--d:.05s">Building the rails</span>
-          <span class="reveal" style="--d:.12s">that move <span class="grad">money</span> at scale.</span>
-        </h1>
-        <p class="hero__lead reveal" style="--d:.2s">
-          I'm <strong>Chakshu Jain</strong>, a backend software engineer specializing in
-          <strong>fintech &amp; payments</strong>. I design high-throughput, event-driven systems
-          in Java &amp; Spring Boot — loan repayment, reconciliation, and transaction processing
-          that stay correct under load.
-        </p>
-
-        <div class="hero__actions reveal" style="--d:.28s">
-          <a href="#projects" class="btn btn--primary">
-            View my work
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a href="#contact" class="btn btn--ghost">Contact me</a>
-        </div>
-
-        <dl class="hero__stats reveal" style="--d:.36s">
-          <div class="stat">
-            <dt class="stat__num" data-count="1000000" data-suffix="+" data-format="compact">0</dt>
-            <dd class="stat__label">Transactions / month</dd>
-          </div>
-          <div class="stat">
-            <dt class="stat__num" data-count="99.95" data-suffix="%" data-decimals="2">0</dt>
-            <dd class="stat__label">Auto-debit uptime</dd>
-          </div>
-          <div class="stat">
-            <dt class="stat__num" data-count="90" data-suffix="%">0</dt>
-            <dd class="stat__label">Fewer recon mismatches</dd>
-          </div>
-          <div class="stat">
-            <dt class="stat__num" data-count="200" data-prefix="&lt;" data-suffix="ms">0</dt>
-            <dd class="stat__label">Passbook query latency</dd>
-          </div>
-        </dl>
+    <!-- ============ HERO / STATEMENT HEAD ============ -->
+    <section class="hero">
+      <div class="hero__label reveal">
+        <span>STATEMENT&nbsp;OF&nbsp;WORK</span>
+        <span class="dot">●</span>
+        <span>PERIOD&nbsp;2021&nbsp;→&nbsp;PRESENT</span>
+        <span class="dot">●</span>
+        <span>NEW&nbsp;DELHI,&nbsp;IN</span>
       </div>
 
-      <a href="#about" class="hero__scroll" aria-label="Scroll to content">
-        <span></span>
-      </a>
+      <h1 class="hero__head">
+        <span class="reveal-line"><span>I build the <em>rails</em> that</span></span>
+        <span class="reveal-line"><span>move money — and the</span></span>
+        <span class="reveal-line"><span><em>ledgers</em> that keep it honest.</span></span>
+      </h1>
+
+      <div class="hero__grid">
+        <p class="hero__lede reveal" style="--d:.15s">
+          I'm <strong>Chakshu Jain</strong>, a backend engineer and the <strong>founding engineer</strong>
+          at a Dubai-based payments company. For five years I've built high-throughput,
+          event-driven systems in <strong>Java &amp; Spring Boot</strong> — the kind where a dropped
+          event isn't a bug, it's a financial discrepancy.
+        </p>
+        <div class="hero__cta reveal" style="--d:.25s">
+          <a href="#systems" class="btn btn--fill">Read the statement</a>
+          <a href="#contact" class="btn btn--line">Get in touch</a>
+        </div>
+      </div>
+
+      <!-- Statement line items -->
+      <dl class="figures reveal" style="--d:.3s">
+        <div class="figure">
+          <dt>Throughput</dt>
+          <dd class="figure__val"><span class="count" data-count="1000000" data-format="compact" data-suffix="+">0</span><span class="figure__unit">/mo</span></dd>
+        </div>
+        <div class="figure">
+          <dt>Auto-debit uptime</dt>
+          <dd class="figure__val"><span class="count" data-count="99.95" data-decimals="2" data-suffix="%">0</span></dd>
+        </div>
+        <div class="figure">
+          <dt>Recon accuracy</dt>
+          <dd class="figure__val"><span class="figure__plus">+</span><span class="count" data-count="90" data-suffix="%">0</span></dd>
+        </div>
+        <div class="figure">
+          <dt>Passbook latency</dt>
+          <dd class="figure__val"><span class="figure__lt">&lt;</span><span class="count" data-count="200" data-suffix="ms">0</span></dd>
+        </div>
+      </dl>
     </section>
 
-    <!-- ============ ABOUT ============ -->
-    <section class="section" id="about">
-      <div class="section__head reveal">
-        <span class="section__tag">01 — About</span>
-        <h2 class="section__title">Backend engineer with a payments obsession</h2>
+    <!-- ============ TICKER ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>1M+ TRANSACTIONS / MONTH</span><span class="ticker__sep">✦</span>
+        <span>99.95% AUTO-DEBIT UPTIME</span><span class="ticker__sep">✦</span>
+        <span>90% FEWER RECON MISMATCHES</span><span class="ticker__sep">✦</span>
+        <span>&lt;200MS PASSBOOK LATENCY</span><span class="ticker__sep">✦</span>
+        <span>SAGA ORCHESTRATION OVER SQS</span><span class="ticker__sep">✦</span>
+        <span>JAVA · SPRING BOOT · KAFKA · AWS</span><span class="ticker__sep">✦</span>
+        <span>1M+ TRANSACTIONS / MONTH</span><span class="ticker__sep">✦</span>
+        <span>99.95% AUTO-DEBIT UPTIME</span><span class="ticker__sep">✦</span>
+        <span>90% FEWER RECON MISMATCHES</span><span class="ticker__sep">✦</span>
+        <span>&lt;200MS PASSBOOK LATENCY</span><span class="ticker__sep">✦</span>
+        <span>SAGA ORCHESTRATION OVER SQS</span><span class="ticker__sep">✦</span>
+        <span>JAVA · SPRING BOOT · KAFKA · AWS</span><span class="ticker__sep">✦</span>
       </div>
-      <div class="about">
-        <div class="about__body reveal">
+    </div>
+
+    <!-- ============ SUMMARY ============ -->
+    <section class="section" id="summary">
+      <div class="colhead reveal"><span class="idx">§01</span><span class="colhead__t">Summary</span></div>
+      <div class="summary">
+        <blockquote class="summary__quote reveal">
+          I care about the <em>boring guarantees</em> — idempotency, fault isolation, an auditable
+          ledger — that let a business trust its own numbers.
+        </blockquote>
+        <div class="summary__body reveal" style="--d:.1s">
           <p>
-            Over the last <strong>5+ years</strong> I've built the systems that sit behind money movement —
-            where a dropped event or an off-by-one reconciliation isn't a bug, it's a financial discrepancy.
-            As the <strong>founding engineer</strong> at a Dubai-based payments startup, I've owned platforms
-            end to end: from schema and API design to the SQS-driven Saga orchestration that keeps them
-            resilient.
+            As a founding engineer I've owned platforms end to end: schema and API design, the
+            SQS-driven <strong>Saga orchestration</strong> that keeps them resilient, and the
+            observability that makes settlement provable. My focus is <strong>correctness at
+            scale</strong> under real load.
           </p>
-          <p>
-            My focus is <strong>correctness at scale</strong>: idempotent processing, clean fault isolation,
-            and observability that makes settlement auditable. I care about the boring guarantees that let
-            a business trust its ledger.
-          </p>
-          <ul class="about__facts">
-            <li><span>Focus</span>Payments, ledgers &amp; reconciliation</li>
-            <li><span>Stack</span>Java · Spring Boot · Kafka · AWS</li>
-            <li><span>Based in</span>New Delhi, India</li>
-            <li><span>Certified</span>Google Cloud Associate Engineer</li>
+          <ul class="summary__facts">
+            <li><span>Focus</span> Payments · ledgers · reconciliation</li>
+            <li><span>Core</span> Java · Spring Boot · Kafka · AWS</li>
+            <li><span>Cert</span> Google Cloud Associate Engineer</li>
+            <li><span>Edu</span> B.Tech CSE · MMU · 8.8 CGPA</li>
           </ul>
         </div>
-
-        <aside class="about__card reveal" style="--d:.1s">
-          <div class="codecard">
-            <div class="codecard__bar">
-              <span></span><span></span><span></span>
-              <em>engineer.java</em>
-            </div>
-            <pre><code><span class="c-key">public class</span> <span class="c-cls">ChakshuJain</span> <span class="c-key">implements</span> <span class="c-cls">Engineer</span> {
-  <span class="c-key">private final</span> String role   = <span class="c-str">"Founding Engineer"</span>;
-  <span class="c-key">private final</span> String domain = <span class="c-str">"Fintech &amp; Payments"</span>;
-  <span class="c-key">private final</span> int    years  = <span class="c-num">5</span>;
-
-  <span class="c-cmt">// what I optimize for</span>
-  <span class="c-key">public</span> Result <span class="c-fn">build</span>(System s) {
-    <span class="c-key">return</span> s
-      .idempotent()
-      .eventDriven()
-      .observable()
-      .<span class="c-fn">correctUnder</span>(Load.<span class="c-num">HIGH</span>);
-  }
-}</code></pre>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <!-- ============ EXPERIENCE ============ -->
-    <section class="section" id="work">
-      <div class="section__head reveal">
-        <span class="section__tag">02 — Experience</span>
-        <h2 class="section__title">Where I've built</h2>
-      </div>
-
-      <ol class="timeline">
-        <li class="tl reveal">
-          <div class="tl__marker"><span></span></div>
-          <div class="tl__content">
-            <div class="tl__top">
-              <h3>Founding Engineer <span class="tl__lvl">SDE-II</span></h3>
-              <span class="tl__date">Sep 2022 — Present</span>
-            </div>
-            <p class="tl__org">Huru Payments <span class="tl__meta">· Fintech Startup · New Delhi, IN</span></p>
-            <p class="tl__desc">
-              First engineer at a Dubai-based payments company. Designed and owned the core
-              money-movement platform from the ground up.
-            </p>
-            <ul class="tl__points">
-              <li>Built a <strong>Loan Repayment System</strong> handling multi-mode payments (NetBanking, Cards, Auto-debit) at <strong>1M+ transactions/month</strong>.</li>
-              <li>Engineered resilient auto-debit retries sustaining <strong>99.95% uptime</strong> and re-architected flows with <strong>Saga orchestration over SQS</strong>.</li>
-              <li>Automated day-end <strong>reconciliation</strong> across banks &amp; networks, cutting mismatches by <strong>90%</strong>.</li>
-              <li>Shipped a real-time <strong>Transaction History</strong> passbook microservice at <strong>sub-200ms</strong> query latency.</li>
-            </ul>
-            <div class="tl__tags">
-              <span>Java</span><span>Spring Boot</span><span>SQS/SNS</span><span>Kafka</span><span>PostgreSQL</span><span>Redis</span>
-            </div>
-          </div>
-        </li>
-
-        <li class="tl reveal">
-          <div class="tl__marker"><span></span></div>
-          <div class="tl__content">
-            <div class="tl__top">
-              <h3>Software Development Engineer</h3>
-              <span class="tl__date">Feb 2022 — Sep 2022</span>
-            </div>
-            <p class="tl__org">Freecharge by Axis Bank <span class="tl__meta">· Gurgaon, IN</span></p>
-            <ul class="tl__points">
-              <li>Built an Android <strong>SMS-parsing service</strong> to assess creditworthiness, reducing manual verification.</li>
-              <li>Integrated <strong>CIBIL (TransUnion)</strong> for automated credit-score retrieval.</li>
-            </ul>
-            <div class="tl__tags"><span>Java</span><span>Android</span><span>Credit</span></div>
-          </div>
-        </li>
-
-        <li class="tl reveal">
-          <div class="tl__marker"><span></span></div>
-          <div class="tl__content">
-            <div class="tl__top">
-              <h3>Software Development Engineer</h3>
-              <span class="tl__date">May 2021 — Feb 2022</span>
-            </div>
-            <p class="tl__org">HashedIn by Deloitte <span class="tl__meta">· Bangalore, IN</span></p>
-            <ul class="tl__points">
-              <li>Built backend services for <strong>EDUPOOL</strong>, a collaborative learning platform syncing notes and videos from YouTube, Coursera &amp; Udemy.</li>
-            </ul>
-            <div class="tl__tags"><span>Java</span><span>Spring</span><span>REST APIs</span></div>
-          </div>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ============ PROJECTS ============ -->
-    <section class="section" id="projects">
-      <div class="section__head reveal">
-        <span class="section__tag">03 — Selected Work</span>
-        <h2 class="section__title">Systems I've designed &amp; shipped</h2>
-        <p class="section__sub">Four core services behind a live payments platform.</p>
-      </div>
-
-      <div class="projects">
-        <article class="proj reveal">
-          <div class="proj__glow"></div>
-          <div class="proj__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg>
-          </div>
-          <h3 class="proj__title">Loan Repayment System</h3>
-          <p class="proj__tag">LRS · Core Platform</p>
-          <p class="proj__desc">
-            A scalable repayment engine processing multi-mode payments — NetBanking, cards, and
-            auto-debit — at over a million transactions a month. Recovery workflows were tuned to
-            reduce failures and lift collection rates.
-          </p>
-          <ul class="proj__metrics">
-            <li><b>1M+</b><span>tx / month</span></li>
-            <li><b>99.95%</b><span>uptime</span></li>
-            <li><b>Saga</b><span>over SQS</span></li>
-          </ul>
-          <div class="proj__stack"><span>Java</span><span>Spring Boot</span><span>SQS</span><span>Event-Driven</span></div>
-        </article>
-
-        <article class="proj reveal" style="--d:.08s">
-          <div class="proj__glow"></div>
-          <div class="proj__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M4 7l3-3M4 7l3 3M20 17H4M20 17l-3-3M20 17l-3 3"/></svg>
-          </div>
-          <h3 class="proj__title">Reconciliation Service</h3>
-          <p class="proj__tag">Recon · Settlement</p>
-          <p class="proj__desc">
-            Automated day-end reconciliation for card transactions across banks and networks,
-            streamlining settlement accuracy between issuers, acquirers, and card schemes while
-            improving audit readiness.
-          </p>
-          <ul class="proj__metrics">
-            <li><b>90%</b><span>fewer mismatches</span></li>
-            <li><b>Multi</b><span>bank / network</span></li>
-            <li><b>Audit</b><span>ready</span></li>
-          </ul>
-          <div class="proj__stack"><span>Java</span><span>Batch</span><span>PostgreSQL</span><span>Settlement</span></div>
-        </article>
-
-        <article class="proj reveal" style="--d:.16s">
-          <div class="proj__glow"></div>
-          <div class="proj__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 8v4l3 2"/><circle cx="12" cy="12" r="9"/></svg>
-          </div>
-          <h3 class="proj__title">Transaction History View</h3>
-          <p class="proj__tag">THV · Real-time</p>
-          <p class="proj__desc">
-            A microservice that aggregates and transforms events into a real-time passbook —
-            a single source of truth across orders, offers, and banking events, answering queries
-            in under 200 milliseconds.
-          </p>
-          <ul class="proj__metrics">
-            <li><b>&lt;200ms</b><span>query latency</span></li>
-            <li><b>1 SoT</b><span>unified view</span></li>
-            <li><b>Realtime</b><span>ingestion</span></li>
-          </ul>
-          <div class="proj__stack"><span>Java</span><span>Kafka</span><span>Redis</span><span>CQRS</span></div>
-        </article>
-
-        <article class="proj reveal" style="--d:.24s">
-          <div class="proj__glow"></div>
-          <div class="proj__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
-          </div>
-          <h3 class="proj__title">Encryption Library</h3>
-          <p class="proj__tag">Security · Platform</p>
-          <p class="proj__desc">
-            A generic, reflection-based encryption library that eliminated repetitive crypto
-            implementation across microservices — encrypt-by-annotation, consistent everywhere,
-            with one place to audit.
-          </p>
-          <ul class="proj__metrics">
-            <li><b>Reusable</b><span>drop-in lib</span></li>
-            <li><b>Reflection</b><span>annotation-based</span></li>
-            <li><b>DRY</b><span>zero repeat</span></li>
-          </ul>
-          <div class="proj__stack"><span>Java</span><span>Reflection</span><span>Crypto</span><span>Library</span></div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ============ SKILLS ============ -->
-    <section class="section" id="skills">
-      <div class="section__head reveal">
-        <span class="section__tag">04 — Toolbox</span>
-        <h2 class="section__title">Technical skills</h2>
-      </div>
-
-      <div class="skills">
-        <div class="skillgroup reveal">
-          <h3>Languages</h3>
-          <div class="chips"><span>Java</span><span>Python</span><span>SQL</span><span>C++</span><span>C</span><span>HTML</span><span>CSS</span></div>
-        </div>
-        <div class="skillgroup reveal" style="--d:.06s">
-          <h3>Frameworks</h3>
-          <div class="chips"><span>Spring</span><span>Spring Boot</span><span>Hibernate / JPA</span></div>
-        </div>
-        <div class="skillgroup reveal" style="--d:.12s">
-          <h3>Architecture</h3>
-          <div class="chips"><span>Microservices</span><span>REST APIs</span><span>Event-Driven</span><span>Saga Orchestration</span><span>Distributed Systems</span></div>
-        </div>
-        <div class="skillgroup reveal" style="--d:.18s">
-          <h3>Databases</h3>
-          <div class="chips"><span>MySQL</span><span>PostgreSQL</span><span>Redis</span></div>
-        </div>
-        <div class="skillgroup reveal" style="--d:.24s">
-          <h3>Cloud &amp; Messaging</h3>
-          <div class="chips"><span>AWS</span><span>GCP</span><span>Kafka</span><span>SQS / SNS</span><span>Kubernetes</span><span>Docker</span></div>
-        </div>
-        <div class="skillgroup reveal" style="--d:.3s">
-          <h3>Practices &amp; Tools</h3>
-          <div class="chips"><span>CI/CD</span><span>System Design</span><span>Git</span><span>Cursor</span><span>Claude Code</span></div>
-        </div>
-      </div>
-
-      <!-- Achievements -->
-      <div class="section__head reveal" style="margin-top:5rem">
-        <span class="section__tag">05 — Recognition</span>
-        <h2 class="section__title">Achievements &amp; education</h2>
-      </div>
-      <div class="achievements">
-        <div class="ach reveal">
-          <div class="ach__icon">☁️</div>
-          <h4>Google Cloud Certified</h4>
-          <p>Associate Cloud Engineer</p>
-        </div>
-        <div class="ach reveal" style="--d:.06s">
-          <div class="ach__icon">🏆</div>
-          <h4>Smart India Hackathon</h4>
-          <p>Finalist · 2019–20</p>
-        </div>
-        <div class="ach reveal" style="--d:.12s">
-          <div class="ach__icon">🎯</div>
-          <h4>JEE Advanced 2017</h4>
-          <p>Top 5% of 180,000+ candidates</p>
-        </div>
-        <div class="ach reveal" style="--d:.18s">
-          <div class="ach__icon">🎓</div>
-          <h4>B.Tech, CSE</h4>
-          <p>MM University · CGPA 8.8/10</p>
+        <div class="stamp reveal" style="--d:.2s" aria-hidden="true">
+          <span class="stamp__l1">FOUNDING</span>
+          <span class="stamp__l2">ENGINEER</span>
+          <span class="stamp__l3">EST. 2022</span>
         </div>
       </div>
     </section>
 
-    <!-- ============ CONTACT ============ -->
-    <section class="section section--contact" id="contact">
-      <div class="contact reveal">
-        <span class="section__tag">06 — Contact</span>
-        <h2 class="contact__title">Let's build something that <span class="grad">has to work</span>.</h2>
-        <p class="contact__sub">
-          Open to conversations about backend, payments, and fintech infrastructure.
-          The fastest way to reach me is email.
-        </p>
-        <a href="mailto:mrck572@gmail.com" class="btn btn--primary btn--lg">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-          mrck572@gmail.com
-        </a>
-        <div class="contact__links">
-          <a href="https://linkedin.com/in/chakshu-jain" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/chakshujain" target="_blank" rel="noopener">GitHub</a>
+    <!-- ============ LEDGER / EXPERIENCE ============ -->
+    <section class="section" id="ledger">
+      <div class="colhead reveal"><span class="idx">§02</span><span class="colhead__t">Employment ledger</span></div>
+
+      <div class="ledger">
+        <div class="ledger__head" aria-hidden="true">
+          <span>Period</span><span>Position</span><span>Organisation</span><span>Scope</span>
+        </div>
+
+        <article class="entry reveal">
+          <div class="entry__period"><span class="mono">SEP 2022</span><span class="entry__arrow">→</span><span class="mono entry__now">NOW</span></div>
+          <div class="entry__role"><h3>Founding Engineer <sup>SDE-II</sup></h3></div>
+          <div class="entry__org"><span class="org">Huru&nbsp;Payments</span><span class="loc">Fintech startup · New Delhi</span></div>
+          <div class="entry__scope">
+            <p>First engineer on a Dubai-based payments platform. Designed the core money-movement stack from zero — repayment, reconciliation, real-time history.</p>
+            <div class="tags"><span>Java</span><span>Spring Boot</span><span>SQS/SNS</span><span>Kafka</span><span>PostgreSQL</span><span>Redis</span></div>
+          </div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="entry__period"><span class="mono">FEB 2022</span><span class="entry__arrow">→</span><span class="mono">SEP 2022</span></div>
+          <div class="entry__role"><h3>Software Development Engineer</h3></div>
+          <div class="entry__org"><span class="org">Freecharge</span><span class="loc">by Axis Bank · Gurgaon</span></div>
+          <div class="entry__scope">
+            <p>Built an Android SMS-parsing service to assess creditworthiness and integrated CIBIL (TransUnion) for automated credit-score retrieval.</p>
+            <div class="tags"><span>Java</span><span>Android</span><span>Credit</span><span>CIBIL</span></div>
+          </div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="entry__period"><span class="mono">MAY 2021</span><span class="entry__arrow">→</span><span class="mono">FEB 2022</span></div>
+          <div class="entry__role"><h3>Software Development Engineer</h3></div>
+          <div class="entry__org"><span class="org">HashedIn</span><span class="loc">by Deloitte · Bangalore</span></div>
+          <div class="entry__scope">
+            <p>Backend services for EDUPOOL, a collaborative learning platform syncing notes and video from YouTube, Coursera &amp; Udemy.</p>
+            <div class="tags"><span>Java</span><span>Spring</span><span>REST</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ SYSTEMS / PROJECTS ============ -->
+    <section class="section" id="systems">
+      <div class="colhead reveal"><span class="idx">§03</span><span class="colhead__t">Systems of record</span><span class="colhead__note">Four core services behind a live payments platform</span></div>
+
+      <div class="systems">
+        <article class="sys reveal">
+          <div class="sys__no">01</div>
+          <div class="sys__main">
+            <h3 class="sys__title">Loan Repayment System</h3>
+            <p class="sys__desc">A scalable repayment engine processing multi-mode payments — NetBanking, cards, and auto-debit — with recovery workflows tuned to cut failures and lift collection rates.</p>
+            <div class="tags"><span>Event-Driven</span><span>Saga / SQS</span><span>Spring Boot</span></div>
+          </div>
+          <dl class="sys__stats">
+            <div><dt>Volume</dt><dd>1M+<small>tx / mo</small></dd></div>
+            <div><dt>Uptime</dt><dd>99.95%</dd></div>
+          </dl>
+        </article>
+
+        <article class="sys reveal">
+          <div class="sys__no">02</div>
+          <div class="sys__main">
+            <h3 class="sys__title">Reconciliation Service</h3>
+            <p class="sys__desc">Automated day-end reconciliation for card transactions across banks and networks — streamlining settlement between issuers, acquirers and schemes, and improving audit readiness.</p>
+            <div class="tags"><span>Batch</span><span>Settlement</span><span>PostgreSQL</span></div>
+          </div>
+          <dl class="sys__stats">
+            <div><dt>Mismatches</dt><dd>−90%</dd></div>
+            <div><dt>Coverage</dt><dd>Multi<small>bank</small></dd></div>
+          </dl>
+        </article>
+
+        <article class="sys reveal">
+          <div class="sys__no">03</div>
+          <div class="sys__main">
+            <h3 class="sys__title">Transaction History View</h3>
+            <p class="sys__desc">A microservice aggregating and transforming events into a real-time passbook — one source of truth across orders, offers and banking events, answering queries in milliseconds.</p>
+            <div class="tags"><span>CQRS</span><span>Kafka</span><span>Redis</span></div>
+          </div>
+          <dl class="sys__stats">
+            <div><dt>Latency</dt><dd>&lt;200<small>ms</small></dd></div>
+            <div><dt>Model</dt><dd>1 SoT</dd></div>
+          </dl>
+        </article>
+
+        <article class="sys reveal">
+          <div class="sys__no">04</div>
+          <div class="sys__main">
+            <h3 class="sys__title">Encryption Library</h3>
+            <p class="sys__desc">A generic, reflection-based encryption library — encrypt-by-annotation — that killed repetitive crypto across microservices and gave the platform one place to audit.</p>
+            <div class="tags"><span>Reflection</span><span>Crypto</span><span>Reusable</span></div>
+          </div>
+          <dl class="sys__stats">
+            <div><dt>Reuse</dt><dd>Drop-in</dd></div>
+            <div><dt>Repeat</dt><dd>Zero</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ INDEPENDENT BUILDS ============ -->
+    <section class="section" id="builds">
+      <div class="colhead reveal"><span class="idx">§04</span><span class="colhead__t">Off the clock</span><span class="colhead__note">Independent builds — same instincts, my own repos</span></div>
+
+      <div class="builds">
+        <article class="build reveal">
+          <div class="build__top"><span class="build__lang">Python</span><a class="build__repo" href="https://github.com/chakshujain/XAUlert" target="_blank" rel="noopener">/XAUlert ↗</a></div>
+          <h3 class="build__title">XAUlert</h3>
+          <p class="build__desc">A transparent, rule-based directional alert engine for gold (XAU). Three pillars — <em>technical</em>, <em>macro</em> and <em>news-sentiment</em> — each score −1…+1, blended into a bias + confidence call. Every alert shows exactly which signals drove it.</p>
+          <div class="tags"><span>yfinance</span><span>MACD/RSI</span><span>VADER NLP</span><span>Telegram</span></div>
+        </article>
+
+        <article class="build reveal" style="--d:.08s">
+          <div class="build__top"><span class="build__lang">TypeScript</span><a class="build__repo" href="https://github.com/chakshujain/streaksy" target="_blank" rel="noopener">/streaksy ↗</a></div>
+          <h3 class="build__title">Streaksy <span class="build__alt">· Solvo</span></h3>
+          <p class="build__desc">A full-stack social goal-tracking &amp; DSA-prep platform — curated roadmaps, streaks, real-time war-room chat and a browser extension that syncs your LeetCode solves. End-to-end product work, from schema to deploy.</p>
+          <div class="tags"><span>Next.js</span><span>Express</span><span>PostgreSQL</span><span>Redis</span><span>Socket.io</span><span>CI/CD</span></div>
+        </article>
+
+        <article class="build reveal" style="--d:.16s">
+          <div class="build__top"><span class="build__lang">Python</span><a class="build__repo" href="https://github.com/chakshujain/dealhunter" target="_blank" rel="noopener">/dealhunter ↗</a></div>
+          <h3 class="build__title">DealHunter</h3>
+          <p class="build__desc">An autonomous deal-scraping and alerting agent for Indian quick-commerce platforms — scrapers, a scoring engine, an orchestrator and a scheduler, packaged as a Dockerized service. The same event-driven, alert-on-signal shape as my day job.</p>
+          <div class="tags"><span>Scrapers</span><span>Orchestration</span><span>Scheduler</span><span>Docker</span></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ STACK / SKILLS DATASHEET ============ -->
+    <section class="section" id="stack">
+      <div class="colhead reveal"><span class="idx">§05</span><span class="colhead__t">Technical datasheet</span></div>
+      <div class="datasheet">
+        <div class="spec reveal"><span class="spec__k">Languages</span><span class="spec__dots"></span><span class="spec__v">Java · Python · SQL · C++ · C</span></div>
+        <div class="spec reveal"><span class="spec__k">Frameworks</span><span class="spec__dots"></span><span class="spec__v">Spring · Spring Boot · Hibernate / JPA</span></div>
+        <div class="spec reveal"><span class="spec__k">Architecture</span><span class="spec__dots"></span><span class="spec__v">Microservices · REST · Event-Driven · Saga · Distributed Systems</span></div>
+        <div class="spec reveal"><span class="spec__k">Data</span><span class="spec__dots"></span><span class="spec__v">PostgreSQL · MySQL · Redis</span></div>
+        <div class="spec reveal"><span class="spec__k">Cloud &amp; Messaging</span><span class="spec__dots"></span><span class="spec__v">AWS · GCP · Kafka · SQS / SNS · Kubernetes · Docker</span></div>
+        <div class="spec reveal"><span class="spec__k">Practices &amp; Tools</span><span class="spec__dots"></span><span class="spec__v">System Design · CI/CD · Git · Cursor · Claude Code</span></div>
+      </div>
+
+      <div class="colhead reveal" style="margin-top:4.5rem"><span class="idx">§06</span><span class="colhead__t">On record</span></div>
+      <ul class="records">
+        <li class="rec reveal"><span class="rec__mark">✓</span><b>Google Cloud Certified</b> — Associate Cloud Engineer</li>
+        <li class="rec reveal"><span class="rec__mark">✓</span><b>Smart India Hackathon</b> — Finalist, 2019–20</li>
+        <li class="rec reveal"><span class="rec__mark">✓</span><b>JEE Advanced 2017</b> — Top 5% of 180,000+ candidates</li>
+        <li class="rec reveal"><span class="rec__mark">✓</span><b>B.Tech, CSE</b> — MM University · 8.8 / 10 CGPA</li>
+      </ul>
+    </section>
+
+    <!-- ============ CONTACT / SETTLEMENT ============ -->
+    <section class="section section--settle" id="contact">
+      <div class="colhead reveal"><span class="idx">§07</span><span class="colhead__t">Settlement</span></div>
+      <div class="settle reveal">
+        <h2 class="settle__head">Let's build something that <em>has to work.</em></h2>
+        <p class="settle__sub">Open to conversations about backend, payments and fintech infrastructure. Email settles fastest.</p>
+        <a href="mailto:mrck572@gmail.com" class="settle__email">mrck572@gmail.com<span class="settle__arrow">→</span></a>
+        <div class="settle__row">
+          <a href="https://linkedin.com/in/chakshu-jain" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://github.com/chakshujain" target="_blank" rel="noopener">GitHub ↗</a>
           <a href="tel:+917206838191">+91 72068 38191</a>
         </div>
       </div>
@@ -396,8 +306,9 @@
   </main>
 
   <footer class="footer">
-    <p>© <span id="year"></span> Chakshu Jain · Backend Engineer · Fintech &amp; Payments</p>
-    <p class="footer__built">Designed &amp; built from scratch — New Delhi, India</p>
+    <span>END OF STATEMENT</span>
+    <span>© <span id="year"></span> CHAKSHU JAIN</span>
+    <span>SET IN FRAUNCES &amp; JETBRAINS MONO</span>
   </footer>
 
   <script src="js/main.js"></script>
