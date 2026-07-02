@@ -1,41 +1,53 @@
 /* ============================================================
    CHAKSHU JAIN — UI interactions
    Preloader, smooth scroll, reveals, counters, tilt, cursor.
+   Content is visible by default; GSAP animates FROM hidden,
+   so a failed CDN or stalled script never blanks the page.
    ============================================================ */
 (function () {
   'use strict';
 
+  // debug hook for headless screenshots: ?shot=N shifts the page up N px
+  var shotOffset = location.search.match(/[?&]shot=(\d+)/);
+  if (shotOffset) document.documentElement.style.marginTop = '-' + shotOffset[1] + 'px';
+
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-  var hasGsap = typeof gsap !== 'undefined';
-  if (hasGsap && typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+  var noFx = reduceMotion || /[?&]nofx/.test(location.search);
+  var hasGsap = typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined';
+  if (hasGsap) gsap.registerPlugin(ScrollTrigger);
+  var animate = hasGsap && !noFx;
 
-  /* ---------- preloader ---------- */
   function formatCount(el, v) {
     if (el.dataset.format === 'compact') {
       return new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(Math.round(v));
     }
     return v.toFixed(parseInt(el.dataset.decimals || '0', 10));
   }
+  function setFinalCounts() {
+    document.querySelectorAll('.count').forEach(function (el) {
+      el.textContent = formatCount(el, parseFloat(el.dataset.count)) + (el.dataset.suffix || '');
+    });
+  }
 
+  /* ---------- preloader ---------- */
   var loader = document.getElementById('loader');
   var loaderBar = document.getElementById('loaderBar');
   var loaderPct = document.getElementById('loaderPct');
-  var progress = { v: 0 };
   var loaderDone = false;
 
   function finishLoader() {
     if (loaderDone) return;
     loaderDone = true;
     loader.classList.add('done');
-    document.body.classList.add('loaded');
     playIntro();
   }
 
-  if (hasGsap && !reduceMotion) {
+  if (animate) {
+    var progress = { v: 0 };
     gsap.to(progress, {
       v: 100,
-      duration: 1.6,
+      duration: 1.2,
       ease: 'power2.inOut',
       onUpdate: function () {
         var p = Math.round(progress.v);
@@ -44,44 +56,32 @@
       },
       onComplete: finishLoader,
     });
-    // safety: never hold the page hostage
-    setTimeout(finishLoader, 4000);
+    setTimeout(finishLoader, 3500); // never hold the page hostage
   } else {
     finishLoader();
   }
 
   /* ---------- intro (hero) ---------- */
   function playIntro() {
-    if (!hasGsap || reduceMotion) {
-      document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('shown'); });
-      document.querySelectorAll('.count').forEach(function (el) {
-        el.textContent = formatCount(el, parseFloat(el.dataset.count)) + (el.dataset.suffix || '');
-      });
+    if (!animate) {
+      setFinalCounts();
       return;
     }
-    var tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
-    tl.from('.hero__title .word', { yPercent: 120, duration: 1.1, stagger: 0.12 }, 0.1)
-      .to('.hero .reveal', {
-        opacity: 1, y: 0, duration: 1, stagger: 0.1,
-        onComplete: function () {
-          document.querySelectorAll('.hero .reveal').forEach(function (el) { el.classList.add('shown'); });
-        },
-      }, 0.5);
+    gsap.timeline({ defaults: { ease: 'power4.out' } })
+      .from('.hero__title .word', { yPercent: 120, duration: 1.1, stagger: 0.14 }, 0.1)
+      .from('.hero .reveal', { opacity: 0, y: 30, duration: 1, stagger: 0.1, clearProps: 'all' }, 0.5);
     initScrollAnimations();
   }
 
   /* ---------- smooth scroll (Lenis) ---------- */
   var lenis = null;
-  if (typeof Lenis !== 'undefined' && !reduceMotion) {
+  if (typeof Lenis !== 'undefined' && !noFx) {
     lenis = new Lenis({ lerp: 0.1, wheelMultiplier: 1.0 });
-    function rafLenis(time) {
+    (function rafLenis(time) {
       lenis.raf(time);
       requestAnimationFrame(rafLenis);
-    }
-    requestAnimationFrame(rafLenis);
-    if (hasGsap && typeof ScrollTrigger !== 'undefined') {
-      lenis.on('scroll', ScrollTrigger.update);
-    }
+    })(0);
+    if (hasGsap) lenis.on('scroll', ScrollTrigger.update);
   }
 
   // anchor links through lenis
@@ -92,27 +92,24 @@
       e.preventDefault();
       closeMenu();
       if (lenis) lenis.scrollTo(target, { offset: -20, duration: 1.4 });
-      else target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+      else target.scrollIntoView({ behavior: noFx ? 'auto' : 'smooth' });
     });
   });
 
   /* ---------- scroll-driven animations ---------- */
   function initScrollAnimations() {
-    if (!hasGsap || typeof ScrollTrigger === 'undefined') return;
-
     // reveals outside the hero
     document.querySelectorAll('.reveal').forEach(function (el) {
       if (el.closest('.hero')) return;
-      gsap.to(el, {
-        opacity: 1, y: 0, duration: 1, ease: 'power3.out',
+      gsap.from(el, {
+        opacity: 0, y: 40, duration: 1, ease: 'power3.out', clearProps: 'all',
         scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-        onComplete: function () { el.classList.add('shown'); },
       });
     });
 
     // contact big title words
     gsap.from('.contact__title .word', {
-      yPercent: 120, duration: 1, stagger: 0.1, ease: 'power4.out',
+      yPercent: 120, duration: 1, stagger: 0.12, ease: 'power4.out',
       scrollTrigger: { trigger: '.contact__title', start: 'top 80%', once: true },
     });
 
@@ -148,9 +145,6 @@
       });
     });
   }
-  if (reduceMotion) {
-    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('shown'); });
-  }
 
   /* ---------- nav ---------- */
   var nav = document.getElementById('nav');
@@ -185,7 +179,7 @@
   document.getElementById('year').textContent = new Date().getFullYear();
 
   /* ---------- custom cursor ---------- */
-  if (finePointer && !reduceMotion) {
+  if (finePointer && !noFx) {
     var cursor = document.getElementById('cursor');
     var ring = document.getElementById('cursorRing');
     var cx = -100, cy = -100, rx = -100, ry = -100;
@@ -209,7 +203,7 @@
   }
 
   /* ---------- 3D tilt cards ---------- */
-  if (finePointer && !reduceMotion) {
+  if (finePointer && !noFx) {
     document.querySelectorAll('[data-tilt]').forEach(function (card) {
       var bounds = null;
       card.addEventListener('pointerenter', function () {
@@ -220,7 +214,7 @@
         var px = (e.clientX - bounds.left) / bounds.width - 0.5;
         var py = (e.clientY - bounds.top) / bounds.height - 0.5;
         card.style.transform =
-          'perspective(900px) rotateX(' + (-py * 7) + 'deg) rotateY(' + (px * 9) + 'deg) translateZ(6px)';
+          'perspective(900px) rotateX(' + (-py * 6) + 'deg) rotateY(' + (px * 8) + 'deg) translateZ(4px)';
       });
       card.addEventListener('pointerleave', function () {
         card.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1)';
@@ -232,9 +226,9 @@
   }
 
   /* ---------- magnetic buttons ---------- */
-  if (finePointer && !reduceMotion && hasGsap) {
+  if (finePointer && !noFx && hasGsap) {
     document.querySelectorAll('.magnetic').forEach(function (el) {
-      var strength = 26;
+      var strength = 22;
       el.addEventListener('pointermove', function (e) {
         var b = el.getBoundingClientRect();
         var x = e.clientX - (b.left + b.width / 2);
@@ -246,4 +240,6 @@
       });
     });
   }
+
+  if (noFx) setFinalCounts();
 })();

@@ -1,10 +1,10 @@
 # Chakshu Jain — Portfolio
 
-An immersive **3D portfolio** for a backend / fintech engineer, themed as
-**"money rails"** — a full-screen WebGL scene of particle streams flowing along
-glowing transaction rails, with a scroll-driven camera, mouse parallax, kinetic
-typography, 3D-tilting glass cards, animated counters, a custom cursor and
-buttery smooth scrolling.
+An immersive **3D portfolio** for a backend / fintech engineer — a full-screen
+WebGL **particle-wave field** (a dark ocean of light with an emerald glow,
+shader-driven so it costs no CPU per frame), with a scroll-eased camera, a
+cursor-following ripple, kinetic typography, 3D-tilting glass cards, animated
+counters, a custom cursor and buttery smooth scrolling.
 
 Static HTML, CSS and JS — no build step, no `node_modules`. Three.js, GSAP and
 Lenis load from CDNs. Live at **https://chakshujain.github.io**
@@ -15,7 +15,7 @@ Lenis load from CDNs. Live at **https://chakshujain.github.io**
 .
 ├── index.html         # all content & markup (import map for Three.js)
 ├── css/styles.css     # dark design system, glass cards, responsive layout
-├── js/scene.js        # Three.js scene: rails, particles, core, scroll camera
+├── js/scene.js        # Three.js scene: shader wave field, dust, scroll camera
 ├── js/main.js         # preloader, GSAP reveals, counters, tilt, cursor, nav
 ├── assets/chakshu.jpg # headshot
 └── README.md
@@ -40,8 +40,10 @@ python3 -m http.server 8000
 - **Content** — everything lives in `index.html` (experience, systems, builds, skills, contact).
 - **Colors** — edit the CSS variables at the top of `css/styles.css` (`--accent`, `--accent-2`, `--gold`).
 - **Counters** — read from `data-count` / `data-decimals` / `data-suffix` attributes on `.count`.
-- **3D scene** — tune rail shapes, particle counts and camera choreography in `js/scene.js`
-  (`RAILS`, `PER_RAIL`, and the scroll section of `tick()`).
+- **3D scene** — tune grid density (`COLS`/`ROWS`), wave shape (vertex shader) and
+  camera choreography (the scroll section of `tick()`) in `js/scene.js`.
+- **Screenshot/debug hooks** — `?nofx` disables all animations; `?shot=N` shifts
+  the page up N px (useful for headless captures).
 
 ## Notes
 
